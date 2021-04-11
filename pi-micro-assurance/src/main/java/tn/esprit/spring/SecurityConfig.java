@@ -1,4 +1,4 @@
-package tn.esprit.spring;
+/*package tn.esprit.spring;
 
 import javax.sql.DataSource;
 
@@ -41,4 +41,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 
-}
+}*/

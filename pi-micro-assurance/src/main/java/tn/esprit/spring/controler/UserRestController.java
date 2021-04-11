@@ -29,34 +29,34 @@ import tn.esprit.spring.dao.entities.User;
 import tn.esprit.spring.service.UserServiceInterface;
 
 @RestController
-@Secured(value={"ROLE_ADMIN"})
+//@Secured(value={"ROLE_ADMIN"})
 public class UserRestController {
 	@Autowired
 	UserServiceInterface us;
-	@PostMapping("/add-user")
-	@ResponseBody
+	@PostMapping("/addUser")
+	
 	public User addUser(@RequestBody User u) {
 	User user = us.addUser(u);
 	return user;
 
 	}
-	@DeleteMapping("/remove-user/{user-id}")
-	@ResponseBody
+	@DeleteMapping("/removeUser/{user-id}")
+	
 	public void deleteUser(@PathVariable("user-id") int id) {
 	us.deleteUser(id);
 	}
-	@PutMapping("/modify-user")
-	@ResponseBody
+	@PutMapping("/modifyUser")
+	
 	public User modifyUser(@RequestBody User user) {
 	return us.updateUser(user);
 	}
-	@GetMapping("/retrieve-user/{user-id}")
-	@ResponseBody
+	@GetMapping("/retrieveUser/{user-id}")
+	
 	public User retrieveUser(@PathVariable("user-id") int id) {
 	return us.retrieveUser(id);
 	}
 	@GetMapping("/retrieve-all-users")
-	@ResponseBody
+	
 	public List<User> retrieveAllUsers() {
 	List<User> list = us.retrieveAllUsers();
 	return list;
@@ -71,19 +71,6 @@ public class UserRestController {
 
 			return  new ResponseEntity<User>(user, HttpStatus.OK);
 		}
-		@RequestMapping(value="/getlogedUser")
-		public Map<String,Object> getLogedUser(HttpServletRequest httpServletRequest ){
-	//injecter la session courante
-			HttpSession httpSession=httpServletRequest.getSession();
-			SecurityContext securityContext= (SecurityContext) httpSession.getAttribute("SPRING_SECURITY_CONTEXT");
-			String username=securityContext.getAuthentication().getName();
-			List<String> roles= new ArrayList<>();
-			for (GrantedAuthority ga :securityContext.getAuthentication().getAuthorities()){
-				roles.add(ga.getAuthority());} //granted authority:users allowed
-			Map<String,Object> params=new HashMap<>();//objet type map
-			params.put("Username", username);
-			params.put("roles", roles);
-			return params;
-			}
+		
 	}
 
