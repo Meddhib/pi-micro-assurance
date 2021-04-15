@@ -74,8 +74,8 @@ public class ContractService implements IContractService {
 		double FNG;
 		double netprim;
 		for(Product prod :panier){
-			Insurer ins=inrR.findInsuerById(prod.getInsurer_ID());
-			purePrimium+=CalculatePurePrimium(ppBiginigReferenceYear,ppBiginigReferenceYear,prod.getCategory(),ins);
+			//Insurer ins=inrR.findInsuerById(prod.getInsurer_ID());
+		//	purePrimium+=CalculatePurePrimium(ppBiginigReferenceYear,ppBiginigReferenceYear,prod.getCategory(),ins);
 			
 			
 		}

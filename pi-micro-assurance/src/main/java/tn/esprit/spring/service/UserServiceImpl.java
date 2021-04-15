@@ -1,60 +1,81 @@
 package tn.esprit.spring.service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import tn.esprit.spring.dao.entities.Role;
 import tn.esprit.spring.dao.entities.User;
 import tn.esprit.spring.repository.UserRepository;
 
-@Service
-public class UserServiceImpl implements UserServiceInterface {
-	
-	
-	@Autowired
-	UserRepository userRep;
 
+@Service
+public class UserServiceImpl implements UserService {
+
+	@Autowired
+	private UserRepository userRepository;
+	
+	
 	@Override
 	public List<User> retrieveAllUsers() {
-		List<User> list = new ArrayList<>();
-        Iterable<User> items = userRep.findAll();
-        items.forEach(list::add);
-        return list; 
+		List<User> useres = (List<User>) userRepository.findAll();
+		return useres;
 	}
 
 	@Override
 	public User addUser(User u) {
-		
-		return userRep.save(u);
+		u.setPassword(new BCryptPasswordEncoder().encode(u.getPassword()));
+		User user =userRepository.save(u);
+		return user;
 	}
 
 	@Override
-	public boolean deleteUser(int id) {
-		if (userRep.existsById(id)){
-			userRep.deleteById(id);
-			return true;
-		}
-		else{
-		return false;
-		}}
+	public void deleteUser(Long id) {
+		userRepository.deleteById(id);
 		
-	
-
-
-	@Override
-	public User updateUser(User user) {
-		return userRep.save(user);
 	}
 
 	@Override
-	public User retrieveUser(int id) {
-		return userRep.findById(id).get();  
+	public User updateUser(User u) {
+		User user=userRepository.save(u);
+		return user;
+	}
+
+	@Override
+	public User retrieveUser(Long id) {
+		Optional<User> user=userRepository.findById(id);
+		if (user != null ) {
+			return user.get();
 		}
+		return null;
+		
+	}
+	@Override
+	public User retrieveUserByLoginOrEmail(String login) {
+		User user = userRepository.findUserByLoginOrEmail(login);
+		return user;
+	}
+	
+	@Override
+	public List<User> retrieveUserById(Long id) {
+		List<User> users = userRepository.findUserByID(id);
+		return users;
+	}
+
+	public Long countUser() {
+        return userRepository.count();
+    }
+	
+	@Override
+	public int findUserByRole(Role role) {
+		 List<User>listUserByRole =  userRepository.findUserByRole(role);
+		 int countUserByRole =  listUserByRole.size();
+		return countUserByRole;
+	}
 
 	
-	
-
-
 }

@@ -9,6 +9,8 @@ import tn.esprit.spring.dao.entities.Insurer;
 @Repository
 public interface InsurerRepository extends JpaRepository<Insurer,Long> {
 
-	Insurer findInsuerById(long insurer_ID);
+	
+
+	
 
 }

@@ -1,132 +1,155 @@
 package tn.esprit.spring.dao.entities;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
 
 
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class User implements Serializable{
-	
+public class User implements Serializable {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	
-	
+
+
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	@Column(name="User_ID")
-	private long id = 1L;// Clé primaire
+	private Long Id;
+	@Column
+	private String firstName;
+	@Column
+	private String lastName;
+	@Column(name="password")
+	private String password;
+	@Column(name="username")
+	private String username;
 	
-	@Column(name="USER_NAME" , length=50, nullable=false, unique=false)
-	private String name;
 	
-	@Column(name="USER_FirstNAME", length=50, nullable=false, unique=false)
-	private String firstname;
-	
+
+	public User(String username) {
+		super();
+		this.username = username;
+	}
+
+
+	public String getUsername() {
+		return username;
+	}
+
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	@Column(name="USER_CIN", length=8, nullable=false, unique=false)
-	private int Cin;
-	
+	private int cin;
 	@Column(name="USER_Email", length=40, nullable=false, unique=false)
 	private String email;
-	
 	@Column(name="USER_PhoneNumber", length=15, nullable=false, unique=false)
 	private int phoneNumber;
-	
 	@Column(name="USER_Address")
 	private String address;
-	
 	@Column(name="USER_Login")
 	private String login;
 	
-	@Column(name="USER_Password")
-	private String password;
-	
+
 	@Column(name="USER_status")
 	private String status;
 
-/*	@Column(name="users_roles")
-	@ManyToMany
-	@JoinTable(name="Role")
-//	private Collection<Role> role;*/
-	
-	private boolean isActived;
+	@Enumerated(EnumType.STRING)
+	private Role role;
 
 
 
-/*	private Collection<Role> roles;
-	public User(boolean isActived) {
+	public User(long id, String firstName, String lastName, String password, int cin, String email, int phoneNumber,
+			String address, String login, String status, Role role) {
 		super();
-		this.isActived = isActived;
-	}*/
-
-	public boolean isActived() {
-		return isActived;
-	}
-
-	public void setActived(boolean isActived) {
-		this.isActived = isActived;
-	}
-
-	public User(long id, String name, String firstname, int cin, String email, int phoneNumber, String address,
-			String login, String password, String status/*, /*Collection<Role> roles)*/ ){
-		super();
-		this.id = id;
-		this.name = name;
-		this.firstname = firstname;
-		Cin = cin;
+		Id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.password = password;
+		this.cin = cin;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 		this.address = address;
 		this.login = login;
-		this.password = password;
 		this.status = status;
-		
+		this.role = role;
 	}
 
-/*	public Collection<Role> getRoles() {
-		return getRoles();
+
+	public Role getRole() {
+		return role;
+	}
+	
+
+	public Long getId() {
+		return Id;
+	}
+
+	public void setId(Long id) {
+		Id = id;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public void setAddress(String address) {
 		this.address = address;
 	}
 
-	public void setRoles(Collection<Role> roles) {
-		this.roles = roles;
-	}*/
+	public void setRole(Role role) {
+		this.role = role;
+	}
 
-	public User(){};
+	
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
 	
 
 
-	public long getId() {
-		return id;
+	public String getAddress() {
+		return address;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public String getFirstname() {
-		return firstname;
-	}
+	public User(){};
 
 	public int getCin() {
-		return Cin;
+		return cin;
 	}
 
 	public String getEmail() {
@@ -137,7 +160,7 @@ public class User implements Serializable{
 		return phoneNumber;
 	}
 
-	
+
 	public String getLogin() {
 		return login;
 	}
@@ -150,20 +173,8 @@ public class User implements Serializable{
 		return status;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
-	}
-
-	public void setCin(int cin) {
-		Cin = cin;
+public void setCin(int cin) {
+		cin = cin;
 	}
 
 	public void setEmail(String email) {
@@ -192,3 +203,10 @@ public class User implements Serializable{
 
 
 }
+
+
+
+
+
+
+

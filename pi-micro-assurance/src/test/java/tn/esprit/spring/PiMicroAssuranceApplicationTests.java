@@ -1,4 +1,4 @@
-package tn.esprit.spring;
+/*package tn.esprit.spring;
 
 import java.util.Date;
 import org.junit.jupiter.api.Test;
@@ -16,14 +16,14 @@ import tn.esprit.spring.service.UserServiceInterface;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 class PiMicroAssuranceApplicationTests  {
-	
+/*	
 	@Autowired
 	UserServiceInterface us;
 	
 	
 	
 	
-
+/*
 	@Test
 	void contextLoads() throws ParseException {
     us.retrieveAllUsers();             
