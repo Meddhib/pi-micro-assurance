@@ -24,28 +24,18 @@ public class Insured extends User  {
 	private Date recordingDate;
 	
 	@Column(name="Insured_health")
-	private int healthStatus;
-	
+	private String healthStatus;
 	
 	@Column(name="Insured_CivilStatus")
 	private String civilStatus;
-	
-	@Column(name="Gender")
-	private Gender gender;
-	
-	@Column(name="sinster_number")
-	private int sinsterNumber;
-	
 	@Column(name="Segment")
-	private Segment segment;
+	private Segment Segment;
 	
 	@Column(name="Insured_Age")
 	private int age;
-	@Column(name="Income")
-	private int income;
 	
 	public Insured(){};
-	public Insured(Date recordingDate, int healthStatus, String civilStatus, int age, Set<Contract> contracts,
+	public Insured(Date recordingDate, String healthStatus, String civilStatus, int age, Set<Contract> contracts,
 			Set<Claims> claims) {
 		super();
 		this.recordingDate = recordingDate;
@@ -60,7 +50,7 @@ public class Insured extends User  {
 		return recordingDate;
 	}
 
-	public int getHealthStatus() {
+	public String getHealthStatus() {
 		return healthStatus;
 	}
 
@@ -84,7 +74,7 @@ public class Insured extends User  {
 		this.recordingDate = recordingDate;
 	}
 
-	public void setHealthStatus(int healthStatus) {
+	public void setHealthStatus(String healthStatus) {
 		this.healthStatus = healthStatus;
 	}
 
@@ -110,75 +100,11 @@ public class Insured extends User  {
 	@OneToMany(cascade = CascadeType.ALL)
 	private Set<Claims> claims;
 
-	public int getSegment() {
-		int n=0;
-		switch(this.segment){
-		case Risky1:
-			n=0;
-			break;
-		case Risky2:
-			n= 1;
-			break;
-		case Risky3:
-			n= 2;
-			break;
-		case Risky4:
-			n= 3;
-			break;
-		case Risky5:
-			n= 4;
-			break;
-		case fraud:
-			n= 5;
-			break;
-		default:
-			break;
-		
-		}
-		return n;
+	public Segment getSegment() {
+		return Segment;
 	}
-	public void setSegment(int n) {
-		
-		switch(n){
-		case 0:
-			this.segment=Segment.Risky1;
-			break;
-		case 1:
-			this.segment=Segment.Risky2;
-			break;
-		case 2:
-			this.segment=Segment.Risky3;
-			break;
-		case 3:
-			this.segment=Segment.Risky4;
-			break;
-		case 4:
-			this.segment=Segment.Risky5;
-			break;
-		case 5:
-			this.segment=Segment.fraud;
-			break;
-			
-		}
-		;
-	}
-	public Gender getGender() {
-		return gender;
-	}
-	public void setGender(Gender gender) {
-		this.gender = gender;
-	}
-	public int getSinsterNumber() {
-		return sinsterNumber;
-	}
-	public void setSinsterNumber(int sinsterNumber) {
-		this.sinsterNumber = sinsterNumber;
-	}
-	public int getIncome() {
-		return income;
-	}
-	public void setIncome(int income) {
-		this.income = income;
+	public void setSegment(Segment segment) {
+		Segment = segment;
 	}
 	
 	

@@ -27,10 +27,10 @@ public class ClaimsService implements IClaimsService {
 	InsuredRepository insRep;
 	@Override
 	public long SendClaim(Claims claim, long insuredId) {
+		// TODO Auto-generated method stub
 		
 		
-		
-		Insured ins = insRep.findById(insuredId).get();
+		Insured ins = insRep.findById(insuredId);
 		claim.setInsured(ins);
 	    Calendar calendar = Calendar.getInstance();
 	    claim.setDateClaim(calendar.getTime());
@@ -43,7 +43,7 @@ public class ClaimsService implements IClaimsService {
 
 	@Override
 	public List<Claims> RetrieveAllClaims() {
-		
+		// TODO Auto-generated method stub
 		
 		List<Claims>	Claims =clRep.ViewClaims();
 		return Claims;
@@ -54,7 +54,6 @@ public class ClaimsService implements IClaimsService {
 	public List<Claims> RetrieveNewClaims() {
 		// TODO Auto-generated method stub
 		List<Claims>	Claims =clRep.ViewClaims();
-		
 		return Claims;
 		
 	}
@@ -84,17 +83,14 @@ public class ClaimsService implements IClaimsService {
 
 	@Override
 	public Claims OpenClaimById(long id) {
-		Claims c =clRep.findById(id).get();//.ViewClaimById(id);
-		c.setStatus(1);
-		clRep.save(c);
-		
+		clRep.ViewClaimById(id);
 		//clRep.UpdateClaimStatus(1, id);
 		return clRep.ViewClaimById(id);
 	}
 
 	@Override
 	public int CountClaimsBetween(String EndDate_ddmmmyyyy, String BiginingDate_ddmmmyyyy) {
-		
+		// TODO Auto-generated method stub
 		int claimNember=0;
 		List<Claims> claims=clRep.findAll(Sort.by(Sort.Direction.ASC, "dateClaim"));
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
@@ -124,13 +120,8 @@ public class ClaimsService implements IClaimsService {
 
 	@Override
 	public void DeleteOldClaims(Date firstdate) {
-		List<Claims> c =RetrieveAllClaims();
-		for (Claims claim: c){
-			if(claim.getDateClaim().before(firstdate))
-				clRep.delete(claim);
-			
-		}
 		
+	//	 clRep.DeleteOldClaims(firstdate);
 		
 	
 	}

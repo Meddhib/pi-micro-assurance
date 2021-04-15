@@ -46,7 +46,7 @@ public class Contract implements Serializable {
 	private Date deadLineDate;
 	
 	@Column(name="ContractPolice")
-	private String Policy;
+	private String Police;
 	
 	@Column(name="payedAmount")
 	private double payedAmount;
@@ -95,7 +95,7 @@ public class Contract implements Serializable {
 		this.category = category;
 		this.signDate = signDate;
 		this.deadLineDate = deadLineDate;
-		Policy = police;
+		Police = police;
 		this.payedAmount = payedAmount;
 		this.reminingAmount = reminingAmount;
 		this.netPremiuim = netPremiuim;
@@ -134,8 +134,8 @@ public class Contract implements Serializable {
 	}
 
 
-	public String getPolicy() {
-		return Policy;
+	public String getPolice() {
+		return Police;
 	}
 
 
@@ -239,8 +239,8 @@ public class Contract implements Serializable {
 	}
 
 
-	public void setPolicy(String police) {
-		Policy = police;
+	public void setPolice(String police) {
+		Police = police;
 	}
 
 
