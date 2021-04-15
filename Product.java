@@ -54,23 +54,10 @@ public class Product implements Serializable {
 	private String scale;
 	
 	
-	/*
 	
-	@Entity
-	@Table(name = "T_PRODUCT")
-	public class TravauxPratiques implements Serializable {
-	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) 
-	@Column(name="PRODUCT_ID")
-	Long productId; 
-	@Column(name="PRODUCT_NAME_INSURENT")
-	String tpName_insurent; 
-	@Column(name="PRODUCT_SCORING")
-	Long productScoring; 
-	@ManyToMany(mappedBy="contractProducts", cascade = CascadeType.ALL) 
-	private Set<Contract> contracts;*/
-
+	
+	/*@ManyToMany (mappedBy = "product")
+	private List<Product> products; */
 
 	public long getId() {
 		return id;
@@ -163,3 +150,4 @@ public class Product implements Serializable {
 	
 	
 }
+

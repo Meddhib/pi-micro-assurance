@@ -185,7 +185,7 @@ public void setCin(int cin) {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public void setAdress(String adress) {
+	public void setAdress(String address) {
 		this.address = address;
 	}
 
