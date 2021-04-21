@@ -7,9 +7,15 @@ import javax.persistence.PrimaryKeyJoinColumn;
 
 
 @Entity
-@PrimaryKeyJoinColumn(name = "User_ID")
+@PrimaryKeyJoinColumn(name = "ID")
 public class Admin  extends User {
 	
+	public Admin(Long id, String firstName, String lastName, String login, String password, String email,
+			int phoneNumber, String address, String status, Role role) {
+		super(id, firstName, lastName, login, password, email, phoneNumber, address, status, role);
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * 
 	 */

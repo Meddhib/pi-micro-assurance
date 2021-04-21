@@ -34,172 +34,111 @@ public class User implements Serializable {
 
 
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	@Column(name="User_ID")
-	private Long Id;
-	@Column
+	@GeneratedValue (strategy = GenerationType.AUTO)
+	@Column(name="ID")
+	protected Long Id;
+	@Column(name="firstname")
 	private String firstName;
-	@Column
+	@Column(name="lastname")
 	private String lastName;
+	@Column(name="Login")
+	private String login;
 	@Column(name="password")
 	private String password;
-	@Column(name="username")
-	private String username;
-	
-	
-
-	public User(String username) {
-		super();
-		this.username = username;
-	}
-
-
-	public String getUsername() {
-		return username;
-	}
-
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	@Column(name="USER_CIN", length=8, nullable=false, unique=false)
-	private int cin;
-	@Column(name="USER_Email", length=40, nullable=false, unique=false)
+	@Column(name="Email")
 	private String email;
-	@Column(name="USER_PhoneNumber", length=15, nullable=false, unique=false)
+	@Column(name="PhoneNumber")
 	private int phoneNumber;
-	@Column(name="USER_Address")
+	@Column(name="Address")
 	private String address;
-	@Column(name="USER_Login")
-	private String login;
-	
-
-	@Column(name="USER_status")
+	@Column(name="status")
 	private String status;
-
 	@Enumerated(EnumType.STRING)
 	private Role role;
-
-
-
-	public User(long id, String firstName, String lastName, String password, int cin, String email, int phoneNumber,
-			String address, String login, String status, Role role) {
-		super();
-		Id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.password = password;
-		this.cin = cin;
-		this.email = email;
-		this.phoneNumber = phoneNumber;
-		this.address = address;
-		this.login = login;
-		this.status = status;
-		this.role = role;
-	}
-
-
-	public Role getRole() {
-		return role;
-	}
-	
-
 	public Long getId() {
 		return Id;
 	}
-
-	public void setId(Long id) {
-		Id = id;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public void setRole(Role role) {
-		this.role = role;
-	}
-
-	
-
 	public String getFirstName() {
 		return firstName;
 	}
-
 	public String getLastName() {
 		return lastName;
 	}
-
-	
-
-
-	public String getAddress() {
-		return address;
-	}
-
-	public User(){};
-
-	public int getCin() {
-		return cin;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public int getPhoneNumber() {
-		return phoneNumber;
-	}
-
-
 	public String getLogin() {
 		return login;
 	}
-
 	public String getPassword() {
 		return password;
 	}
-
+	public String getEmail() {
+		return email;
+	}
+	public int getPhoneNumber() {
+		return phoneNumber;
+	}
+	public String getAddress() {
+		return address;
+	}
 	public String getStatus() {
 		return status;
 	}
-
-public void setCin(int cin) {
-		cin = cin;
+	public Role getRole() {
+		return role;
 	}
-
-	public void setEmail(String email) {
-		this.email = email;
+	public void setId(Long id) {
+		Id = id;
 	}
-
-	public void setPhoneNumber(int phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
-
-	public void setAdress(String adress) {
-		this.address = address;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
-
 	public void setLogin(String login) {
 		this.login = login;
 	}
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public void setPhoneNumber(int phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	public void setRole(Role role) {
+		this.role = role;
+	}
+	public User(Long id, String firstName, String lastName, String login, String password, String email,
+			int phoneNumber, String address, String status, Role role) {
+		super();
+		Id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.login = login;
+		this.password = password;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+		this.address = address;
+		this.status = status;
+		this.role = role;
+	}
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+
+
+
+	
 
 
 }

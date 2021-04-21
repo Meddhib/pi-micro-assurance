@@ -4,6 +4,7 @@ package tn.esprit.spring.controler;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,53 +18,66 @@ import tn.esprit.spring.dao.entities.User;
 import tn.esprit.spring.service.UserService;
 
 
+//@CrossOrigin(origins="*", allowedHeaders="*")
 
 @RestController
 public class UserRestController {
+
 	@Autowired
-	UserService userService;
+	UserService us;
 	
-	@GetMapping("/retrieveAllUsers")	
+
+
+	// http://localhost:8081/SpringMVC/servlet/add-user
+	
+	@PostMapping("/add-user")
 	@ResponseBody
-	public List<User> getUsers(){
-		List<User> list = userService.retrieveAllUsers() ;
-		return list; 
-	}
-	@GetMapping("/retrieveAllUsers/{user-id}")
-	@ResponseBody
-	public User retrieveUser(@PathVariable("user-id") Long userId) {
-		return userService.retrieveUser(userId);
-	}
-	 
-	@PostMapping("/addUser")
-	@ResponseBody
-	public User addUser (@RequestBody User u) {
-		User user = userService.addUser(u);
+	public User addUser(@RequestBody User u) {
+		User user = us.addUser(u);
 		return user;
+
 	}
-	
-	@PutMapping("/modifyUuser")
+
+	// http://localhost:8082/SpringMVC/servlet/remove-user/{user-id}
+	//@Secured(value={"ROLE_ADMIN"})
+	@DeleteMapping("/remove-user/{user-id}")
+	@ResponseBody
+	public void deleteUser(@PathVariable("user-id") long id) {
+		us.deleteUser(id);
+	}
+
+	//http://localhost:8082/SpringMVC/servlet/modify-user
+	//@Secured(value={"ROLE_ADMIN"})
+	@PutMapping("/modify-user")
 	@ResponseBody
 	public User modifyUser(@RequestBody User user) {
-		return userService.updateUser(user);
+		return us.updateUser(user);
 	}
- 
-	@DeleteMapping("/removeUser/{user-id}")
+	//http://localhost:8081/SpringMVC/servlet/retrieve-user/{user-id}
+	//@Secured(value={"ROLE_ADMIN"})
+	@GetMapping("/retrieve-user/{user-id}")
 	@ResponseBody
-	public void removeUser(@PathVariable("user-id") Long userId) {
-		userService.deleteUser(userId);
+	public User retrieveUser(@PathVariable("user-id") long id) {
+		return us.retrieveUser(id);
 	}
-	 
+	//http://localhost:8081/SpringMVC/servlet/retrieve-all-users
+	//@Secured(value={"ROLE_ADMIN"})
+	@GetMapping("/retrieve-all-users")
+	@ResponseBody
+	public List<User> retrieveAllUsers() {
+		List<User> list = us.retrieveAllUsers();
+		return list;
+	}
 	@GetMapping("/retrieveUserByLogin/{login}")
 	@ResponseBody
 	public User retrieveUserByLogin (@PathVariable("login") String login) {
-		return userService.retrieveUserByLoginOrEmail(login);
+		return us.retrieveUserByLoginOrEmail(login);
 	}
 	
 	@GetMapping("/numberOfUsers")	
 	@ResponseBody
 	public Long countUser() {
-		Long countUser= userService.countUser() ;
+		Long countUser= us.countUser() ;
 		return countUser;
 	}
  
@@ -73,8 +87,6 @@ public class UserRestController {
 		
 		System.out.println(Role.valueOf(role));
 		System.out.println(Role.valueOf("Customer"));
-		int countUserByRole= userService.findUserByRole(Role.valueOf(role));
+		int countUserByRole= us.findUserByRole(Role.valueOf(role));
 		return countUserByRole;
-	}
- 
-}
+	}}

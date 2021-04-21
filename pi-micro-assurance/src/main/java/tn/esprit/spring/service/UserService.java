@@ -12,13 +12,13 @@ import tn.esprit.spring.dao.entities.User;
 @Repository
 public interface UserService {
 
-	List<User> retrieveAllUsers ();
 	User addUser(User u);
-	void deleteUser (Long id);
-	User updateUser(User u);
-	User retrieveUser(Long id);
-	User retrieveUserByLoginOrEmail(String login);
-	List<User> retrieveUserById(Long id);
+	boolean deleteUser(long id);
+	User updateUser(User user);
+	User retrieveUser(long id);
+	List<User> retrieveAllUsers();
 	Long countUser();
 	int findUserByRole(Role role);
+	User retrieveUserByLoginOrEmail(String login);
+	List<User> retrieveUserById(Long id);
 }

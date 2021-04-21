@@ -16,7 +16,7 @@ import javax.persistence.TemporalType;
 
 @SuppressWarnings("serial")
 @Entity
-@PrimaryKeyJoinColumn(name = "User_ID")
+@PrimaryKeyJoinColumn(name = "ID")
 public class Insured extends User  {
 	
 	
@@ -34,13 +34,17 @@ public class Insured extends User  {
 	@Column(name="Insured_Age")
 	private int age;
 	
-	public Insured(){};
-	public Insured(Date recordingDate, String healthStatus, String civilStatus, int age, Set<Contract> contracts,
+
+
+	public Insured(Long id, String firstName, String lastName, String login, String password, String email,
+			int phoneNumber, String address, String status, Role role, Date recordingDate, String healthStatus,
+			String civilStatus, tn.esprit.spring.dao.entities.Segment segment, int age, Set<Contract> contracts,
 			Set<Claims> claims) {
-		super();
+		super(id, firstName, lastName, login, password, email, phoneNumber, address, status, role);
 		this.recordingDate = recordingDate;
 		this.healthStatus = healthStatus;
 		this.civilStatus = civilStatus;
+		Segment = segment;
 		this.age = age;
 		this.contracts = contracts;
 		this.claims = claims;

@@ -26,8 +26,11 @@ public class Insurer extends User  {
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	private Set<Contract> contracts;
-	public Insurer(String matricul, Set<Contract> contracts) {
-		super();
+	
+
+	public Insurer(Long id, String firstName, String lastName, String login, String password, String email,
+			int phoneNumber, String address, String status, Role role, String matricul, Set<Contract> contracts) {
+		super(id, firstName, lastName, login, password, email, phoneNumber, address, status, role);
 		this.matricul = matricul;
 		this.contracts = contracts;
 	}
