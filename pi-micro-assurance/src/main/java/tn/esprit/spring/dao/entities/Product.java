@@ -1,5 +1,7 @@
 package tn.esprit.spring.dao.entities;
 
+
+
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Date;
@@ -11,7 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
 
 @Entity
 public class Product implements Serializable {
