@@ -35,7 +35,7 @@ public class Claims implements Serializable {
 	private String description;
 	@ManyToOne
 	@JoinColumn(name="User_ID", nullable=false)
-	private  Insured Insured;
+	private  Insured insured;
 	@Column(name="claimsStatus")
 	private int status=0;
 	@Temporal(TemporalType.DATE)
@@ -48,7 +48,7 @@ public class Claims implements Serializable {
 		this.status = status;
 		this.insured = insured;
 	}
-
+	public Claims(){};
 	public long getId() {
 		return id;
 	}
@@ -94,9 +94,9 @@ public class Claims implements Serializable {
 
 
 
-
+/*
 	@ManyToOne(cascade = CascadeType.ALL)
-	Insured insured;
+	Insured insured;*/
 	
 
 }

@@ -14,6 +14,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -30,13 +31,13 @@ public class Contract implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="Contract_ID")
-	private Long id; // Clé primaire
+	private long id; // Clé primaire
 	
 	
 	@Column(name="ContractType")
-	@Enumerated(EnumType.STRING)
+	@Enumerated(EnumType.ORDINAL)
 	private Category category;
 	
 	@Temporal (TemporalType.DATE)
@@ -46,7 +47,7 @@ public class Contract implements Serializable {
 	private Date deadLineDate;
 	
 	@Column(name="ContractPolice")
-	private String Police;
+	private String Policy;
 	
 	@Column(name="payedAmount")
 	private double payedAmount;
@@ -61,7 +62,7 @@ public class Contract implements Serializable {
 	private double totalPemium;
 	
 	@Column(name="NetMangamentFeesPercentage")
-	private double NetMangamentFees;
+	private double NetMangamentFees=10;
 	
 	
 	@Column(name="ContractStatus")
@@ -74,7 +75,7 @@ public class Contract implements Serializable {
 	private double tax;
 	
 	@Column(name="comissionPercentage")
-	private double comission;
+	private double comission=10;
 	
 	
 	@Column(name="reInsurancePart")
@@ -95,7 +96,7 @@ public class Contract implements Serializable {
 		this.category = category;
 		this.signDate = signDate;
 		this.deadLineDate = deadLineDate;
-		Police = police;
+		Policy = police;
 		this.payedAmount = payedAmount;
 		this.reminingAmount = reminingAmount;
 		this.netPremiuim = netPremiuim;
@@ -134,8 +135,8 @@ public class Contract implements Serializable {
 	}
 
 
-	public String getPolice() {
-		return Police;
+	public String getPolicy() {
+		return Policy;
 	}
 
 
@@ -239,8 +240,8 @@ public class Contract implements Serializable {
 	}
 
 
-	public void setPolice(String police) {
-		Police = police;
+	public void setPolicy(String police) {
+		Policy = police;
 	}
 
 
@@ -362,6 +363,9 @@ public class Contract implements Serializable {
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	Insurer insurer;
+	
+	
+	
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	Insured insured;

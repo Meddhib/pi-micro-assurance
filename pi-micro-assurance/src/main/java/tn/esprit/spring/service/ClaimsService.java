@@ -1,5 +1,5 @@
 package tn.esprit.spring.service;
-/*
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.text.ParseException;
@@ -26,15 +26,16 @@ public class ClaimsService implements IClaimsService {
 	@Autowired
 	InsuredRepository insRep;
 	@Override
-	public long SendClaim(Claims claim, long insuredId) {
-		// TODO Auto-generated method stub
+	public long SendClaim(String rec, long insuredId) {
 		
+		Claims claim =new Claims();
 		
-		Insured ins = insRep.findById(insuredId);
+		Insured ins = new Insured();
+		ins=insRep.findById(insuredId).get();
 		claim.setInsured(ins);
 	    Calendar calendar = Calendar.getInstance();
 	    claim.setDateClaim(calendar.getTime());
-	    
+	    claim.setDescription(rec);
 	    clRep.save(claim);	
 		return claim.getId();
 		
@@ -43,7 +44,7 @@ public class ClaimsService implements IClaimsService {
 
 	@Override
 	public List<Claims> RetrieveAllClaims() {
-		// TODO Auto-generated method stub
+		
 		
 		List<Claims>	Claims =clRep.ViewClaims();
 		return Claims;
@@ -52,8 +53,8 @@ public class ClaimsService implements IClaimsService {
 
 	@Override
 	public List<Claims> RetrieveNewClaims() {
-		// TODO Auto-generated method stub
 		List<Claims>	Claims =clRep.ViewClaims();
+		
 		return Claims;
 		
 	}
@@ -63,11 +64,14 @@ public class ClaimsService implements IClaimsService {
 		List<Claims> claims=clRep.findAll(Sort.by(Sort.Direction.ASC, "dateClaim"));
 		List<Claims> claimsDay = new ArrayList<Claims>() ;
 		int i=1;
+		int j=0;
 		for(Claims c : claims ){
-			claimsDay.add(c);
 			
+			claimsDay.add(c);
+			if(claims.get(j).getDateClaim().getDay()!=claims.get(j+1).getDateClaim().getDay())
 			i++;
-			if(i==xDays)
+			j++;
+			if(i==xDays||(j==(claims.size()-1)))
 				break;
 		}
 		return claimsDay;
@@ -83,30 +87,29 @@ public class ClaimsService implements IClaimsService {
 
 	@Override
 	public Claims OpenClaimById(long id) {
-		clRep.ViewClaimById(id);
+		Claims c =clRep.findById(id).get();//.ViewClaimById(id);
+		c.setStatus(1);
+		clRep.save(c);
+		
 		//clRep.UpdateClaimStatus(1, id);
 		return clRep.ViewClaimById(id);
 	}
 
 	@Override
-	public int CountClaimsBetween(String EndDate_ddmmmyyyy, String BiginingDate_ddmmmyyyy) {
-		// TODO Auto-generated method stub
+	public int CountClaimsBetween(String EndDate_ddmmmyyyy, String BiginingDate_ddmmmyyyy) throws ParseException {
+		
 		int claimNember=0;
 		List<Claims> claims=clRep.findAll(Sort.by(Sort.Direction.ASC, "dateClaim"));
-		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		Date datedebut=null;
-		try {
+		
 			datedebut = formatter.parse(BiginingDate_ddmmmyyyy);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		SimpleDateFormat formatter1 = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+		
+		SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd");
 		Date datefin=null;
-		try {
+		
 			datefin = formatter1.parse(EndDate_ddmmmyyyy);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		
 		for(Claims c : claims ){
 			if(c.getDateClaim().after(datedebut))
 				claimNember++;
@@ -119,15 +122,26 @@ public class ClaimsService implements IClaimsService {
 	}
 
 	@Override
-	public void DeleteOldClaims(Date firstdate) {
+	public void DeleteOldClaims(String firstdate) throws ParseException {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		Date datedebut=null;
 		
-	//	 clRep.DeleteOldClaims(firstdate);
+			datedebut = formatter.parse(firstdate);
+		List<Claims> c =RetrieveAllClaims();
+		for (Claims claim: c){
+			if(claim.getDateClaim().before(datedebut))
+				clRep.delete(claim);
+			
+		}
+		
 		
 	
 	}
+
+	
 	
 	
 	
 }
 
-*/
+
