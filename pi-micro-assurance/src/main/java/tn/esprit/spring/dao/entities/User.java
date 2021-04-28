@@ -3,183 +3,147 @@ package tn.esprit.spring.dao.entities;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-public  class User implements Serializable{
-	
-	public User(int id, String name, String firstname, int cin, String email, int phoneNumber, String adress,
-			String login, String password, String status) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.firstname = firstname;
-		Cin = cin;
-		this.email = email;
-		this.phoneNumber = phoneNumber;
-		this.adress = adress;
-		this.login = login;
-		this.password = password;
-		this.status = status;
-	}
+@Table(name = "T_USER")
 
-	/**
-	 * 
-	 */
+public class User implements Serializable {
+
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	@Column(name="User_ID")
-	private int id; // Clé primaire
+	private int id; 
 	
-	@Column(name="USER_NAME")
-	private String name;
+	private String firstName; 
 	
-	@Column(name="USER_FirstNAME")
-	private String firstname;
+	private String lastName;
 	
-	@Column(name="USER_CIN")
-	private int Cin;
+	private String email; 
 	
-	@Column(name="USER_Email")
-	private String email;
+	private String  password;
 	
-	@Column(name="USER_PhoneNumber")
-	private int phoneNumber;
+	@Temporal(TemporalType.DATE)
+	private Date dateNaissance;
 	
-	@Column(name="USER_Adress")
-	private String adress;
+	@Enumerated(EnumType.STRING)
+	Role role; 
 	
-	@Column(name="USER_Login")
-	private String login;
-	
-	@Column(name="USER_Password")
-	private String password;
-	
-	@Column(name="USER_status")
-	private String status;
-	
-	
-	
-	public User(){
-		
+	@Transient
+	private int age; 
+	private boolean active;
+   
+    
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public User() {
+	}
+
+	public User(String firstName, String lastName, Date dateNaissance, boolean active, Role role) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.dateNaissance = dateNaissance;
+		this.active=active;
+		this.role = role;
+	}
+
+	@Override
+	public String toString() {
+		return "User [firstName=" + firstName + ", lastName=" + lastName + ", dateNaissance="
+				+ dateNaissance + ", role=" + role + "]";
 	}
 	
-
-
-
-public User ( String name , String firstname ,int Cin ,String email, int phoneNumber ,String adress,String login ,String password,String status){
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String fName) {
+		this.firstName = fName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lName) {
+		this.lastName = lName;
+	}
+	public Date getDateNaissance() {
+		return dateNaissance;
+	}
+	public void setDateNaissance(Date dateNaissance) {
+		this.dateNaissance = dateNaissance;
+	}
+	public Role getRole() {
+		return role;
+	}
+	public void setRole(Role role) {
+		this.role = role;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public User(int id, String firstName, String lastName, String email, String password, Date dateNaissance, Role role) {
+		this.id=id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.role = role;
+		this.dateNaissance=dateNaissance;
+		this.password = password;
+	} 
+	public User(String firstName, String lastName, String email, String password, boolean active, Role role)
+		{
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+		this.role = role;
+		this.active = active;
+	}
+
+
 	
-	
-	this.name=name ;
-	this.firstname=firstname ;
-	this.Cin=Cin;
-	this.email=email;
-	this.phoneNumber=phoneNumber ;
-	this.adress=adress ;
-	this.login=login;
-	this.password=password ;
-	this.status=status;
-}
-	
-
-public User(String name,String firstname){
-	
-	this.name=name ;
-	this.firstname=firstname ;
-	
-}
-
-public int getId() {
-	return id;
-}
-
-public void setId(int id) {
-	this.id = id;
-}
-
-public String getName() {
-	return name;
-}
-
-public void setName(String name) {
-	this.name = name;
-}
-
-public String getFirstname() {
-	return firstname;
-}
-
-public void setFirstname(String firstname) {
-	this.firstname = firstname;
-}
-
-public int getCin() {
-	return Cin;
-}
-
-public void setCin(int cin) {
-	Cin = cin;
-}
-
-public String getEmail() {
-	return email;
-}
-
-public void setEmail(String email) {
-	this.email = email;
-}
-
-public int getPhoneNumber() {
-	return phoneNumber;
-}
-
-public void setPhoneNumber(int phoneNumber) {
-	this.phoneNumber = phoneNumber;
-}
-
-public String getAdress() {
-	return adress;
-}
-
-public void setAdress(String adress) {
-	this.adress = adress;
-}
-
-public String getLogin() {
-	return login;
-}
-
-public void setLogin(String login) {
-	this.login = login;
-}
-
-public String getPassword() {
-	return password;
-}
-
-public void setPassword(String password) {
-	this.password = password;
-}
-
-public String getStatus() {
-	return status;
-}
-
-public void setStatus(String status) {
-	this.status = status;
-}
-
-public static long getSerialversionuid() {
-	return serialVersionUID;
-}
-
 }

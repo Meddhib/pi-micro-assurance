@@ -33,7 +33,7 @@ public class SinisterServiceImpl implements ISinisterService {
 	ContractRepository contractRep ;
 	
 	
-	private static final org.apache.logging.log4j.Logger l = LogManager.getLogger(UserServiceImpl.class);
+	private static final org.apache.logging.log4j.Logger l = LogManager.getLogger(UserService.class);
 
 	@Override
 	public List<Sinister> retrieveAllSinisters() {

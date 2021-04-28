@@ -26,7 +26,7 @@ public class Insured extends User  {
 	public Insured(int id, String name, String firstname, int cin, String email, int phoneNumber, String adress,
 			String login, String password, String status, Date recordingDate, String healthStatus, String civilStatus,
 			int age, Set<Contract> contracts, Set<Claims> claims, String sex, String profession, String diseases) {
-		super(id, name, firstname, cin, email, phoneNumber, adress, login, password, status);
+		
 		this.recordingDate = recordingDate;
 		this.healthStatus = healthStatus;
 		this.civilStatus = civilStatus;
