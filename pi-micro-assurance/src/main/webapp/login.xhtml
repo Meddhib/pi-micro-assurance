@@ -1,22 +1,46 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/template/template.xhtml">
-	<ui:param name="page_name" value="Connexion" />
-	<ui:define name="menu">
-		<h:form id="form">
-			<b>Connexion</b>
-			<h:panelGrid columns="2">
-				<h:outputText value="Login (Email)" />
-				<h:inputText value="#{userController.login}" />
-				<h:outputText value="Mot de passe" />
-				<h:inputSecret value="#{userController.password}" />
-				<h:commandButton id="btn" value="Connexion"
-					action="#{userController.doLogin()}" />
-				<h:message for="btn" />
-			</h:panelGrid>
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<!--<![endif]-->
+<head>
+<meta charset="utf-8"></meta>
+<title>Login</title>
+<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+	<div class="container">
+		<section id="content">
+		<h:form  action="">
+
+			<h1>Login Form</h1>
+
+			<div>
+				<h:inputText value="#{userController.login}" type="text"
+					placeholder="Username" required="" id="username" />
+
+
+			</div>
+
+
+			<div>
+				<h:inputSecret value="#{userController.password}" type="password"
+					placeholder="Password" required="" id="password" />
+			</div>
+
+			<div>
+				<h:commandButton id="btn"
+					action="#{userController.doLogin()}"  />
+				<a href="#">Lost your password?</a><a
+					href="/Spring/pages/admin/registrationcss.jsf">Register</a>
+			</div>
 		</h:form>
-	</ui:define>
-</ui:composition>
+
+		<!-- form --> </section>
+		<!-- content -->
+	</div>
+	<!-- container -->
+</body>
+</html>
